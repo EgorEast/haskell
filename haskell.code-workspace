@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "root"
+    },
+    {
+      "path": "./practice1",
+      "name": "practice1"
+    }
+  ],
+  "settings": {
+    "cSpell.words": ["signum"]
+  }
+}
