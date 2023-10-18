@@ -69,11 +69,16 @@ isInside :: Circle -> Circle -> Bool
 isInside (x1, y1, r1) (x2, y2, r2) = r1 > r2 + distance x1 y1 x2 y2
 
 intersection :: Circle -> Circle -> Int
-intersection (x1, y1, r1) (x2, y2, r2)
-  | d > r1 + r2 = 0
-  | d == r1 + r2 = 1
-  | d < abs (r1 - r2) = 0
-  | otherwise = 2
+intersection (x1, y1, r1) (x2, y2, r2) =
+  if d > r1 + r2
+    then 0
+    else
+      if d == r1 + r2
+        then 1
+        else
+          if d < abs (r1 - r2)
+            then 0
+            else 2
   where
     d = distance x1 y1 x2 y2
 
@@ -147,10 +152,13 @@ isParallelogram p1 p2 p3 p4 =
 
 -- 2.14
 lineEquation :: (Float, Float) -> (Float, Float) -> (Float, Float, Float)
-lineEquation (x1, y1) (x2, y2)
-  | x1 == x2 = (1, 0, -x1)
-  | y1 == y2 = (0, 1, -y1)
-  | otherwise = (a, -1, y1 - a * x1)
+lineEquation (x1, y1) (x2, y2) =
+  if x1 == x2
+    then (1, 0, -x1)
+    else
+      if y1 == y2
+        then (0, 1, -y1)
+        else (a, -1, y1 - a * x1)
   where
     a = (y2 - y1) / (x2 - x1)
 
