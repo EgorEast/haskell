@@ -60,24 +60,20 @@ triangleHeight side base = sqrt (side ^ 2 - (base / 2) ^ 2)
 
 -- 2.6
 
--- тип для хранения координат и радиуса окружности
 type Circle = (Double, Double, Double)
 
--- функция для определения расстояния между точками на плоскости
 distance :: Double -> Double -> Double -> Double -> Double
 distance x1 y1 x2 y2 = sqrt ((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
 
--- функция для проверки, может ли вторая окружность быть внутри первой
 isInside :: Circle -> Circle -> Bool
 isInside (x1, y1, r1) (x2, y2, r2) = r1 > r2 + distance x1 y1 x2 y2
 
--- функция для определения количества точек пересечения двух окружностей
 intersection :: Circle -> Circle -> Int
 intersection (x1, y1, r1) (x2, y2, r2)
-  | d > r1 + r2 = 0 -- окружности не пересекаются
-  | d == r1 + r2 = 1 -- окружности касаются друг друга
-  | d < abs (r1 - r2) = 0 -- одна окружность внутри другой
-  | otherwise = 2 -- обычное пересечение двух окружностей
+  | d > r1 + r2 = 0
+  | d == r1 + r2 = 1
+  | d < abs (r1 - r2) = 0
+  | otherwise = 2
   where
     d = distance x1 y1 x2 y2
 
@@ -86,12 +82,6 @@ checkCircles (x1, y1, r1) (x2, y2, r2) = if isInside firstC secondC then Left Tr
   where
     firstC = (x1, y1, r1)
     secondC = (x2, y2, r2)
-
-testCheckCircles :: IO ()
-testCheckCircles = do
-  let circle1 = (0, 0, 5)
-      circle2intersect = (5, 5, 4)
-  print (checkCircles circle1 circle2intersect)
 
 -- 2.7
 isPossibleBuildRightTriangle :: Double -> Double -> Double -> String
